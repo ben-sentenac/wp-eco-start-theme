@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Customizer — Eco Starter
  *
@@ -761,7 +762,6 @@ add_action('customize_register', function (\WP_Customize_Manager $wp_customize):
         'section'     => 'eco_scripts',
         'type'        => 'textarea',
     ]);
-
 });
 
 
@@ -879,7 +879,6 @@ add_action('wp_head', function (): void {
     if ($font_size && $font_size !== '16') {
         echo '<style>body{font-size:' . absint($font_size) . 'px}</style>' . "\n";
     }
-
 }, 5); // Après critical CSS (priorité 1), avant les enqueues (priorité 10)
 
 
@@ -964,7 +963,6 @@ add_action('template_redirect', function (): void {
     // Affiche la page de maintenance et arrête l'exécution
     eco_render_maintenance_page();
     exit;
-
 }, 1);
 
 
@@ -983,16 +981,22 @@ function eco_render_maintenance_page(): void
     $logo_id = get_theme_mod('custom_logo');
     $logo    = $logo_id ? wp_get_attachment_image_src($logo_id, 'medium') : null;
 
-    ?>
+?>
     <!DOCTYPE html>
     <html lang="<?php echo esc_attr(get_locale()); ?>">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noindex, nofollow">
         <title><?php echo esc_html($title . ' — ' . get_bloginfo('name')); ?></title>
         <style>
-            *, *::before, *::after { box-sizing: border-box; }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
             body {
                 margin: 0;
                 min-height: 100vh;
@@ -1004,47 +1008,57 @@ function eco_render_maintenance_page(): void
                 color: #1f2937;
                 padding: 2rem;
             }
+
             .maintenance {
                 max-width: 520px;
                 width: 100%;
                 text-align: center;
             }
+
             .maintenance__logo {
                 margin-bottom: 2rem;
             }
+
             .maintenance__logo img {
                 max-height: 60px;
                 width: auto;
                 margin: 0 auto;
             }
+
             .maintenance__icon {
                 font-size: 4rem;
                 margin-bottom: 1.5rem;
                 display: block;
             }
+
             .maintenance__title {
                 font-size: 1.75rem;
                 font-weight: 700;
                 margin: 0 0 1rem;
                 color: #111827;
             }
+
             .maintenance__message {
                 font-size: 1.0625rem;
                 color: #4b5563;
                 line-height: 1.7;
                 margin: 0 0 2rem;
             }
+
             .maintenance__contact {
                 font-size: 0.9375rem;
                 color: #6b7280;
             }
+
             .maintenance__contact a {
                 color: #2563eb;
                 text-decoration: none;
             }
+
             .maintenance__contact a:hover {
                 text-decoration: underline;
             }
+
             .maintenance__bar {
                 margin-top: 3rem;
                 height: 4px;
@@ -1054,6 +1068,7 @@ function eco_render_maintenance_page(): void
             }
         </style>
     </head>
+
     <body>
         <div class="maintenance" role="main">
 
@@ -1087,8 +1102,9 @@ function eco_render_maintenance_page(): void
 
         </div>
     </body>
+
     </html>
-    <?php
+<?php
 }
 
 
@@ -1099,9 +1115,13 @@ function eco_render_maintenance_page(): void
 add_action('wp_head', function (): void {
 
     // Scripts personnalisés <head>
+
+    // Scripts personnalisés <head>
+    // Déjà sanitisé via eco_sanitize_scripts() à la sauvegarde :
+    // seul un admin peut stocker quelque chose — la valeur est sûre à afficher.
     $head_scripts = get_theme_mod('head_scripts', '');
-    if ($head_scripts && current_user_can('manage_options') || !is_admin()) {
-        echo $head_scripts . "\n"; // Déjà sanitisé via eco_sanitize_scripts
+    if ($head_scripts) {
+        echo $head_scripts . "\n";
     }
 
     // Google Analytics 4
@@ -1136,7 +1156,6 @@ add_action('wp_head', function (): void {
         <!-- End Google Analytics 4 -->
         HTML;
     }
-
 }, 99);
 
 
@@ -1163,7 +1182,6 @@ add_action('wp_footer', function (): void {
     if ($footer_scripts) {
         echo $footer_scripts . "\n";
     }
-
 }, 99);
 
 
