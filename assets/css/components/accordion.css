@@ -1,0 +1,85 @@
+/**
+ * Accordéon / FAQ — Eco Starter
+ * Utilise <details> et <summary> natifs HTML
+ */
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.accordion__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition: box-shadow var(--duration-normal) var(--ease-in-out);
+}
+
+.accordion__item[open] {
+    box-shadow: var(--shadow-sm);
+}
+
+.accordion__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    width: 100%;
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--text-md);
+    font-weight: var(--font-semibold);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: var(--transition-color), background-color var(--duration-normal) var(--ease-in-out);
+    list-style: none; /* Supprime le triangle natif Firefox */
+}
+
+.accordion__trigger::-webkit-details-marker {
+    display: none;
+}
+
+.accordion__trigger:hover {
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+}
+
+.accordion__item[open] .accordion__trigger {
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Icône +/- */
+.accordion__icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-color: currentColor;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    transition: mask-image var(--duration-normal);
+}
+
+.accordion__item[open] .accordion__icon {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E");
+}
+
+.accordion__content {
+    padding: var(--space-5) var(--space-6);
+    font-size: var(--text-base);
+    color: var(--color-foreground-alt);
+    line-height: var(--leading-relaxed);
+    background-color: var(--color-background);
+}
+
+.accordion__content > * + * {
+    margin-top: var(--space-4);
+}

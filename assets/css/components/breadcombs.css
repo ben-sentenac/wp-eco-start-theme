@@ -1,0 +1,59 @@
+/**
+ * Fil d'Ariane — Eco Starter
+ */
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-1-5);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    padding-block: var(--space-4);
+    list-style: none;
+    padding-inline: 0;
+    margin: 0;
+}
+
+.breadcrumb__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+}
+
+.breadcrumb__item::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-color: var(--color-muted);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    flex-shrink: 0;
+}
+
+.breadcrumb__item:last-child::after {
+    display: none;
+}
+
+.breadcrumb__link {
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--duration-normal) var(--ease-in-out);
+}
+
+.breadcrumb__link:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+.breadcrumb__item[aria-current="page"] .breadcrumb__link,
+.breadcrumb__current {
+    color: var(--color-foreground);
+    font-weight: var(--font-medium);
+    pointer-events: none;
+}

@@ -1,0 +1,422 @@
+/**
+ * Formulaires — Eco Starter
+ *
+ * Couvre tous les éléments de formulaire natifs WordPress :
+ * - Labels
+ * - Inputs texte, email, URL, tel, number, password, search
+ * - Textarea
+ * - Select
+ * - Checkbox / Radio
+ * - Groupe de champs
+ * - Messages d'erreur / succès
+ * - Formulaire de contact natif du thème
+ * - Formulaire de commentaires WordPress
+ */
+
+
+/* =============================================================================
+   GROUPE DE CHAMP
+   ============================================================================= */
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1-5);
+}
+
+.field + .field {
+    margin-top: var(--space-5);
+}
+
+
+/* =============================================================================
+   LABEL
+   ============================================================================= */
+
+.field__label,
+label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-foreground);
+    cursor: pointer;
+}
+
+/* Indicateur champ obligatoire */
+.field__label .required,
+.required-field label::after {
+    content: ' *';
+    color: var(--color-error);
+    font-weight: var(--font-bold);
+}
+
+
+/* =============================================================================
+   INPUTS — base commune
+   ============================================================================= */
+
+.field__input,
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: var(--space-2-5) var(--space-4);
+    min-height: 44px;
+
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-foreground);
+
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-lg);
+
+    transition:
+        border-color var(--duration-normal) var(--ease-in-out),
+        box-shadow var(--duration-normal) var(--ease-in-out);
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.field__input:hover,
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="url"]:hover,
+input[type="tel"]:hover,
+input[type="number"]:hover,
+input[type="password"]:hover,
+input[type="search"]:hover,
+textarea:hover,
+select:hover {
+    border-color: var(--color-primary);
+}
+
+.field__input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+
+/* Placeholder */
+.field__input::placeholder,
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-placeholder);
+}
+
+/* Disabled */
+.field__input:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: var(--color-surface);
+}
+
+/* Lecture seule */
+input[readonly],
+textarea[readonly] {
+    background-color: var(--color-surface);
+    cursor: default;
+}
+
+/* État invalide (validation HTML5 ou classe JS) */
+.field__input.is-invalid,
+input.is-invalid,
+textarea.is-invalid,
+select.is-invalid {
+    border-color: var(--color-error);
+}
+
+.field__input.is-invalid:focus,
+input.is-invalid:focus,
+textarea.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+/* État valide */
+.field__input.is-valid,
+input.is-valid {
+    border-color: var(--color-success);
+}
+
+
+/* =============================================================================
+   TEXTAREA
+   ============================================================================= */
+
+textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: var(--leading-relaxed);
+}
+
+
+/* =============================================================================
+   SELECT
+   ============================================================================= */
+
+select {
+    padding-right: var(--space-10);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+    cursor: pointer;
+}
+
+select[multiple] {
+    background-image: none;
+    padding-right: var(--space-4);
+}
+
+
+/* =============================================================================
+   CHECKBOX & RADIO
+   Stylés entièrement en CSS — aucun JS nécessaire
+   ============================================================================= */
+
+.field--check {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-3);
+}
+
+.field--check input[type="checkbox"],
+.field--check input[type="radio"] {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 0.1em; /* Alignement vertical avec le label */
+    border: 2px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-background);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition:
+        background-color var(--duration-normal) var(--ease-in-out),
+        border-color var(--duration-normal) var(--ease-in-out);
+    min-height: unset; /* Override le min-height de la règle précédente */
+    padding: 0;
+}
+
+.field--check input[type="radio"] {
+    border-radius: var(--radius-full);
+}
+
+.field--check input[type="checkbox"]:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.field--check input[type="radio"]:checked {
+    border-color: var(--color-primary);
+    background-image: radial-gradient(circle, var(--color-primary) 40%, transparent 40%);
+}
+
+.field--check input:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+.field--check label {
+    font-size: var(--text-base);
+    font-weight: var(--font-regular);
+    cursor: pointer;
+    line-height: var(--leading-normal);
+}
+
+
+/* =============================================================================
+   MESSAGES D'AIDE, ERREUR, SUCCÈS
+   ============================================================================= */
+
+.field__hint {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: var(--leading-normal);
+}
+
+.field__error {
+    font-size: var(--text-sm);
+    color: var(--color-error);
+    font-weight: var(--font-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+}
+
+.field__error::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background-color: currentColor;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+}
+
+/* Message global de formulaire */
+.form-notice {
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    display: none; /* Affiché via JS */
+}
+
+.form-notice.is-visible {
+    display: block;
+}
+
+.form-notice--success {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+.form-notice--error {
+    background-color: var(--color-error-light);
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+}
+
+
+/* =============================================================================
+   FORMULAIRE DE COMMENTAIRES WORDPRESS
+   WordPress génère une structure bien précise — on la style ici
+   ============================================================================= */
+
+#commentform .comment-form-author,
+#commentform .comment-form-email,
+#commentform .comment-form-url,
+#commentform .comment-form-comment {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1-5);
+    margin-bottom: var(--space-5);
+}
+
+#commentform label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-foreground);
+}
+
+#commentform .comment-form-cookies-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+}
+
+#commentform .comment-form-cookies-consent input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 0.1em;
+    min-height: unset;
+    padding: 0;
+}
+
+#commentform .form-submit {
+    margin-top: var(--space-6);
+}
+
+#commentform #submit {
+    @extend .btn, .btn--primary; /* Réutilise le style du bouton primaire */
+    /* Fallback si @extend non supporté : classes ajoutées via PHP dans setup.php */
+}
+
+/* Réponse aux commentaires */
+#respond {
+    margin-top: var(--space-12);
+    padding-top: var(--space-12);
+    border-top: 1px solid var(--color-border);
+}
+
+#respond h3 {
+    margin-bottom: var(--space-8);
+}
+
+/* Liste des commentaires */
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-list .children {
+    list-style: none;
+    padding-left: var(--space-8);
+    margin-top: var(--space-6);
+    border-left: 2px solid var(--color-border);
+}
+
+.comment-body {
+    padding: var(--space-6);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-6);
+}
+
+.comment-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+}
+
+.comment-author img {
+    border-radius: var(--radius-full);
+    width: 40px;
+    height: 40px;
+}
+
+.comment-author .fn {
+    font-weight: var(--font-semibold);
+    font-style: normal;
+}
+
+.comment-metadata a {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+}
+
+.reply {
+    margin-top: var(--space-3);
+}
+
+.comment-reply-link {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-primary);
+}

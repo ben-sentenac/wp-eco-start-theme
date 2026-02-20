@@ -1,0 +1,146 @@
+/**
+ * Header — Eco Starter
+ */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+    height: var(--header-height);
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    transition:
+        height var(--duration-normal) var(--ease-in-out),
+        box-shadow var(--duration-normal) var(--ease-in-out),
+        background-color var(--duration-normal) var(--ease-in-out);
+}
+
+/* Header réduit au scroll — classe ajoutée via JS */
+.site-header.is-scrolled {
+    height: var(--header-height-scroll);
+    box-shadow: var(--shadow-sm);
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    height: 100%;
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--container-px);
+}
+
+@media (min-width: 768px) {
+    .site-header__inner {
+        padding-inline: var(--container-px-md);
+    }
+}
+
+@media (min-width: 1024px) {
+    .site-header__inner {
+        padding-inline: var(--container-px-lg);
+    }
+}
+
+
+/* =============================================================================
+   LOGO
+   ============================================================================= */
+
+.site-header__logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-header__logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.site-header.is-scrolled .site-header__logo img {
+    height: 32px;
+}
+
+/* Titre texte si pas de logo image */
+.site-header__site-name {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-foreground);
+    text-decoration: none;
+    line-height: 1;
+}
+
+.site-header__tagline {
+    font-size: var(--text-xs);
+    color: var(--color-muted);
+    margin-top: var(--space-0-5);
+}
+
+
+/* =============================================================================
+   ACTIONS (CTA, compte, panier)
+   ============================================================================= */
+
+.site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-shrink: 0;
+}
+
+
+/* =============================================================================
+   HEADER TRANSPARENT (hero plein écran)
+   ============================================================================= */
+
+.site-header--transparent {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    position: absolute;
+}
+
+.site-header--transparent .site-nav__link,
+.site-header--transparent .site-header__site-name {
+    color: #ffffff;
+}
+
+.site-header--transparent .site-nav__link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.site-header--transparent.is-scrolled {
+    background-color: var(--color-background);
+    position: fixed;
+}
+
+.site-header--transparent.is-scrolled .site-nav__link,
+.site-header--transparent.is-scrolled .site-header__site-name {
+    color: var(--color-foreground);
+}
+
+/* Skip link — accessibilité */
+.skip-link {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    z-index: var(--z-tooltip);
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transform: translateY(calc(-100% - var(--space-8)));
+    transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}

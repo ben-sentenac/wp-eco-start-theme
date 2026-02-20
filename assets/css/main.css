@@ -1,0 +1,26 @@
+/**
+ * Point d'entrée CSS — Eco Starter
+ *
+ * Ce fichier n'est PAS utilisé directement par WordPress.
+ * WordPress charge chaque fichier indépendamment via inc/enqueue.php
+ * pour le chargement conditionnel.
+ *
+ * Ce fichier sert de référence de l'ordre de la cascade et peut être utilisé
+ * pour un build manuel si besoin.
+ *
+ * Ordre d'import :
+ * 1. Tokens (variables)
+ * 2. Reset
+ * 3. Typographie
+ * 4. Utilitaires
+ * 5. Composants
+ * 6. Layout
+ * 7. Templates (chargés individuellement)
+ */
+
+@import 'base/tokens.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+@import 'base/utilities.css';
+@import 'components/components.css';
+@import 'layout/layout.css';

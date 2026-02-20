@@ -1,0 +1,270 @@
+/**
+ * Cards — Eco Starter
+ *
+ * Composant générique utilisé pour :
+ * - Articles de blog
+ * - Portfolio
+ * - Équipe
+ * - Témoignages
+ * - Produits WooCommerce (base)
+ *
+ * Anatomie :
+ * .card
+ *   .card__media      → image / vidéo
+ *   .card__body       → contenu textuel
+ *     .card__label    → catégorie / eyebrow
+ *     .card__title    → titre
+ *     .card__excerpt  → résumé
+ *     .card__meta     → auteur, date, etc.
+ *     .card__footer   → CTA
+ */
+
+
+/* =============================================================================
+   BASE
+   ============================================================================= */
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    transition:
+        box-shadow var(--duration-normal) var(--ease-in-out),
+        transform var(--duration-normal) var(--ease-out),
+        border-color var(--duration-normal) var(--ease-in-out);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+}
+
+/* Lien enveloppant toute la card */
+.card--linked {
+    cursor: pointer;
+}
+
+.card--linked a.card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+
+/* =============================================================================
+   MÉDIA
+   ============================================================================= */
+
+.card__media {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+    background-color: var(--color-surface);
+}
+
+.card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.card:hover .card__media img {
+    transform: scale(1.04);
+}
+
+/* Badge sur l'image */
+.card__media-badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    z-index: var(--z-raised);
+}
+
+
+/* =============================================================================
+   BODY
+   ============================================================================= */
+
+.card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: var(--space-5) var(--space-6);
+    gap: var(--space-3);
+}
+
+.card__label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.card__title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-snug);
+    color: var(--color-foreground);
+}
+
+.card__title a {
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+}
+
+.card__title a:hover {
+    color: var(--color-primary);
+}
+
+.card__excerpt {
+    font-size: var(--text-base);
+    color: var(--color-foreground-alt);
+    line-height: var(--leading-relaxed);
+    flex: 1;
+}
+
+.card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border);
+    margin-top: auto;
+}
+
+.card__meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1-5);
+}
+
+.card__meta svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.card__footer {
+    padding: var(--space-3) var(--space-6) var(--space-5);
+    margin-top: auto;
+}
+
+
+/* =============================================================================
+   VARIANTES
+   ============================================================================= */
+
+/* --- Horizontale (liste d'articles avec image à gauche) --- */
+.card--horizontal {
+    flex-direction: row;
+}
+
+.card--horizontal .card__media {
+    width: 200px;
+    flex-shrink: 0;
+    aspect-ratio: unset;
+}
+
+@media (max-width: 640px) {
+    .card--horizontal {
+        flex-direction: column;
+    }
+    .card--horizontal .card__media {
+        width: 100%;
+        aspect-ratio: 3 / 2;
+    }
+}
+
+/* --- Featured (grande carte mise en avant) --- */
+.card--featured {
+    border: none;
+    position: relative;
+    color: #ffffff;
+    background-color: var(--color-gray-900);
+}
+
+.card--featured .card__media {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: unset;
+    z-index: var(--z-base);
+}
+
+.card--featured .card__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.4) 50%,
+        rgba(0, 0, 0, 0.1) 100%
+    );
+    z-index: 1;
+}
+
+.card--featured .card__body {
+    position: relative;
+    z-index: var(--z-raised);
+    padding: var(--space-8);
+    margin-top: auto;
+    gap: var(--space-4);
+    min-height: 380px;
+    justify-content: flex-end;
+}
+
+.card--featured .card__title {
+    font-size: var(--text-2xl);
+    color: #ffffff;
+}
+
+.card--featured .card__excerpt {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card--featured .card__label {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card--featured .card__meta {
+    border-top-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Minimal (sans bordure ni ombre) --- */
+.card--minimal {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+.card--minimal:hover {
+    box-shadow: none;
+    transform: none;
+}
+
+.card--minimal .card__body {
+    padding-inline: 0;
+}
+
+/* --- Portrait (team, testimonials) --- */
+.card--portrait .card__media {
+    aspect-ratio: 4 / 5;
+}
+
+/* --- Fond coloré --- */
+.card--surface {
+    background-color: var(--color-surface);
+    border-color: transparent;
+}

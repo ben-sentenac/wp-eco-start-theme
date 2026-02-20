@@ -1,0 +1,300 @@
+/**
+ * Utilitaires CSS — Eco Starter
+ *
+ * Uniquement les utilitaires les plus utiles, pas un framework complet.
+ * Principe : si un utilitaire est utilisé moins de 3 fois, c'est un composant.
+ */
+
+
+/* =============================================================================
+   DISPLAY
+   ============================================================================= */
+
+.block         { display: block; }
+.inline        { display: inline; }
+.inline-block  { display: inline-block; }
+.flex          { display: flex; }
+.inline-flex   { display: inline-flex; }
+.grid          { display: grid; }
+.hidden        { display: none; }
+
+/* Visually hidden — accessible mais invisible */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Visible uniquement au focus (skip links, etc.) */
+.sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+
+/* =============================================================================
+   FLEXBOX
+   ============================================================================= */
+
+.flex-col     { flex-direction: column; }
+.flex-row     { flex-direction: row; }
+.flex-wrap    { flex-wrap: wrap; }
+.flex-nowrap  { flex-wrap: nowrap; }
+
+.items-start    { align-items: flex-start; }
+.items-center   { align-items: center; }
+.items-end      { align-items: flex-end; }
+.items-stretch  { align-items: stretch; }
+.items-baseline { align-items: baseline; }
+
+.justify-start   { justify-content: flex-start; }
+.justify-center  { justify-content: center; }
+.justify-end     { justify-content: flex-end; }
+.justify-between { justify-content: space-between; }
+.justify-around  { justify-content: space-around; }
+.justify-evenly  { justify-content: space-evenly; }
+
+.flex-1     { flex: 1 1 0%; }
+.flex-auto  { flex: 1 1 auto; }
+.flex-none  { flex: none; }
+
+.gap-1  { gap: var(--space-1); }
+.gap-2  { gap: var(--space-2); }
+.gap-3  { gap: var(--space-3); }
+.gap-4  { gap: var(--space-4); }
+.gap-5  { gap: var(--space-5); }
+.gap-6  { gap: var(--space-6); }
+.gap-8  { gap: var(--space-8); }
+.gap-10 { gap: var(--space-10); }
+.gap-12 { gap: var(--space-12); }
+
+
+/* =============================================================================
+   GRID
+   ============================================================================= */
+
+.grid-cols-1  { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2  { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3  { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-cols-4  { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+
+.col-span-1  { grid-column: span 1 / span 1; }
+.col-span-2  { grid-column: span 2 / span 2; }
+.col-span-3  { grid-column: span 3 / span 3; }
+.col-span-4  { grid-column: span 4 / span 4; }
+.col-span-6  { grid-column: span 6 / span 6; }
+.col-span-full { grid-column: 1 / -1; }
+
+/* Grid responsive fluide — sans media queries */
+.grid-auto-fill-sm {
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+}
+.grid-auto-fill-md {
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+}
+.grid-auto-fill-lg {
+    grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+}
+
+
+/* =============================================================================
+   CONTAINER
+   ============================================================================= */
+
+.container {
+    width: 100%;
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--container-px);
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-inline: var(--container-px-md);
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding-inline: var(--container-px-lg);
+    }
+}
+
+.container--sm  { max-width: var(--container-sm); }
+.container--md  { max-width: var(--container-md); }
+.container--lg  { max-width: var(--container-lg); }
+.container--xl  { max-width: var(--container-xl); }
+.container--2xl { max-width: var(--container-2xl); }
+.container--prose { max-width: var(--prose-width); }
+
+
+/* =============================================================================
+   SPACING — margin et padding
+   Uniquement les plus utilisés pour éviter le bloat
+   ============================================================================= */
+
+.m-auto { margin: auto; }
+.mx-auto { margin-inline: auto; }
+
+.mt-0  { margin-top: var(--space-0); }
+.mt-4  { margin-top: var(--space-4); }
+.mt-6  { margin-top: var(--space-6); }
+.mt-8  { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+.mt-16 { margin-top: var(--space-16); }
+
+.mb-0  { margin-bottom: var(--space-0); }
+.mb-4  { margin-bottom: var(--space-4); }
+.mb-6  { margin-bottom: var(--space-6); }
+.mb-8  { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
+
+/* Sections — espacement vertical des blocs de page */
+.section-py {
+    padding-block: var(--space-16);
+}
+@media (min-width: 1024px) {
+    .section-py {
+        padding-block: var(--space-24);
+    }
+}
+
+.section-py--sm {
+    padding-block: var(--space-10);
+}
+@media (min-width: 1024px) {
+    .section-py--sm {
+        padding-block: var(--space-16);
+    }
+}
+
+
+/* =============================================================================
+   COULEURS DE FOND
+   ============================================================================= */
+
+.bg-background  { background-color: var(--color-background); }
+.bg-surface     { background-color: var(--color-surface); }
+.bg-surface-alt { background-color: var(--color-surface-alt); }
+.bg-primary     { background-color: var(--color-primary); }
+.bg-primary-light { background-color: var(--color-primary-light); }
+
+
+/* =============================================================================
+   BORDURES
+   ============================================================================= */
+
+.border        { border: 1px solid var(--color-border); }
+.border-top    { border-top: 1px solid var(--color-border); }
+.border-bottom { border-bottom: 1px solid var(--color-border); }
+.rounded-sm   { border-radius: var(--radius-sm); }
+.rounded      { border-radius: var(--radius-md); }
+.rounded-lg   { border-radius: var(--radius-lg); }
+.rounded-xl   { border-radius: var(--radius-xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+
+/* =============================================================================
+   OMBRES
+   ============================================================================= */
+
+.shadow-sm  { box-shadow: var(--shadow-sm); }
+.shadow     { box-shadow: var(--shadow-md); }
+.shadow-lg  { box-shadow: var(--shadow-lg); }
+.shadow-xl  { box-shadow: var(--shadow-xl); }
+
+
+/* =============================================================================
+   POSITION
+   ============================================================================= */
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed    { position: fixed; }
+.sticky   { position: sticky; }
+
+.inset-0 { inset: 0; }
+.top-0   { top: 0; }
+.z-fixed { z-index: var(--z-fixed); }
+
+
+/* =============================================================================
+   OVERFLOW
+   ============================================================================= */
+
+.overflow-hidden { overflow: hidden; }
+.overflow-auto   { overflow: auto; }
+.overflow-x-auto { overflow-x: auto; }
+
+
+/* =============================================================================
+   ASPECT RATIO
+   ============================================================================= */
+
+.aspect-square  { aspect-ratio: 1 / 1; }
+.aspect-video   { aspect-ratio: 16 / 9; }
+.aspect-card    { aspect-ratio: 3 / 2; }
+.aspect-portrait { aspect-ratio: 4 / 5; }
+
+
+/* =============================================================================
+   OBJECT FIT
+   ============================================================================= */
+
+.object-cover   { object-fit: cover; }
+.object-contain { object-fit: contain; }
+.object-center  { object-position: center; }
+
+
+/* =============================================================================
+   LARGEUR / HAUTEUR
+   ============================================================================= */
+
+.w-full  { width: 100%; }
+.h-full  { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+
+
+/* =============================================================================
+   RESPONSIVE VISIBILITY
+   ============================================================================= */
+
+@media (max-width: 767px) {
+    .hide-mobile { display: none !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .hide-tablet { display: none !important; }
+}
+@media (min-width: 1024px) {
+    .hide-desktop { display: none !important; }
+}
+@media (max-width: 1023px) {
+    .show-desktop-only { display: none !important; }
+}
+@media (min-width: 1024px) {
+    .show-mobile-only { display: none !important; }
+}
+
+
+/* =============================================================================
+   PRINT
+   ============================================================================= */
+
+@media print {
+    .no-print { display: none !important; }
+}

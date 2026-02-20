@@ -1,0 +1,379 @@
+/**
+ * Layout — Eco Starter
+ *
+ * Structure de page globale :
+ * - Skeleton html/body
+ * - Layout principal (full-width + sidebar optionnelle)
+ * - Zones de contenu (entry, archive, sidebar)
+ * - Structures de grilles de page réutilisables
+ */
+
+/* =============================================================================
+   STRUCTURE GLOBALE
+   ============================================================================= */
+
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.site-header {
+    flex-shrink: 0;
+}
+
+.site-content {
+    flex: 1;
+    width: 100%;
+}
+
+.site-footer {
+    flex-shrink: 0;
+}
+
+
+/* =============================================================================
+   CONTENEUR DE PAGE
+   Structure commune à toutes les pages
+   ============================================================================= */
+
+.page-wrapper {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--container-px);
+    padding-block: var(--space-12);
+}
+
+@media (min-width: 768px) {
+    .page-wrapper {
+        padding-inline: var(--container-px-md);
+        padding-block: var(--space-16);
+    }
+}
+
+@media (min-width: 1024px) {
+    .page-wrapper {
+        padding-inline: var(--container-px-lg);
+        padding-block: var(--space-20);
+    }
+}
+
+
+/* =============================================================================
+   LAYOUT FULL-WIDTH (défaut)
+   ============================================================================= */
+
+.layout--fullwidth .content-area {
+    width: 100%;
+    max-width: var(--prose-width);
+    margin-inline: auto;
+}
+
+/* Pages larges — portfolio, archive, landing */
+.layout--fullwidth .content-area--wide {
+    max-width: 100%;
+}
+
+.layout--fullwidth .content-area--xl {
+    max-width: var(--container-xl);
+    margin-inline: auto;
+}
+
+
+/* =============================================================================
+   LAYOUT SIDEBAR (optionnel, activé via Customizer)
+   ============================================================================= */
+
+.layout--sidebar .page-wrapper {
+    display: grid;
+    grid-template-columns: 1fr var(--sidebar-width);
+    gap: var(--space-12);
+    align-items: start;
+}
+
+.layout--sidebar .content-area {
+    min-width: 0; /* Évite le débordement dans le grid */
+}
+
+.layout--sidebar .widget-area {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+/* Sur mobile, la sidebar passe en dessous */
+@media (max-width: 1023px) {
+    .layout--sidebar .page-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .layout--sidebar .widget-area {
+        position: static;
+        border-top: 1px solid var(--color-border);
+        padding-top: var(--space-10);
+    }
+}
+
+
+/* =============================================================================
+   GRILLES D'ARCHIVES / LISTES
+   ============================================================================= */
+
+/* Archive blog — liste verticale */
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+/* Archive blog — grille */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+    gap: var(--space-6);
+}
+
+/* Archive avec featured post en pleine largeur */
+.posts-grid--featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-6);
+}
+
+.posts-grid--featured .card:first-child {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 767px) {
+    .posts-grid--featured {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Grille CPT générique */
+.cpt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    gap: var(--space-6);
+}
+
+.cpt-grid--2 {
+    grid-template-columns: repeat(auto-fill, minmax(min(440px, 100%), 1fr));
+}
+
+.cpt-grid--4 {
+    grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+}
+
+
+/* =============================================================================
+   SECTION GÉNÉRIQUE
+   Bloc de contenu avec fond, titre et sous-titre
+   ============================================================================= */
+
+.section {
+    padding-block: var(--space-16);
+}
+
+@media (min-width: 1024px) {
+    .section {
+        padding-block: var(--space-24);
+    }
+}
+
+.section__header {
+    max-width: 48ch;
+    margin-bottom: var(--space-12);
+}
+
+.section__header--centered {
+    margin-inline: auto;
+    text-align: center;
+}
+
+.section__label {
+    display: inline-block;
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+}
+
+.section__title {
+    font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-foreground);
+    margin-bottom: var(--space-4);
+}
+
+.section__subtitle {
+    font-size: clamp(var(--text-base), 2vw, var(--text-lg));
+    color: var(--color-foreground-alt);
+    line-height: var(--leading-relaxed);
+}
+
+/* Variantes de fond */
+.section--surface  { background-color: var(--color-surface); }
+.section--primary  { background-color: var(--color-primary); }
+.section--dark     { background-color: var(--color-gray-900); }
+
+.section--primary .section__title,
+.section--primary .section__label,
+.section--primary .section__subtitle,
+.section--dark .section__title,
+.section--dark .section__subtitle {
+    color: #ffffff;
+}
+
+.section--primary .section__subtitle,
+.section--dark .section__subtitle {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.section--primary .section__label,
+.section--dark .section__label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* =============================================================================
+   ARTICLE SINGLE
+   ============================================================================= */
+
+.entry-header {
+    margin-bottom: var(--space-10);
+}
+
+.entry-header .entry-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    margin-bottom: var(--space-5);
+}
+
+.entry-header .entry-meta a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.entry-header .entry-meta a:hover {
+    text-decoration: underline;
+}
+
+.entry-header .entry-title {
+    margin-bottom: var(--space-6);
+}
+
+.entry-thumbnail {
+    margin-bottom: var(--space-10);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    aspect-ratio: 16 / 7;
+}
+
+.entry-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.entry-content {
+    /* Hérite la classe .prose via PHP */
+}
+
+.entry-footer {
+    margin-top: var(--space-10);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.entry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.entry-tags a {
+    display: inline-flex;
+    padding: var(--space-1) var(--space-3);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-foreground-alt);
+    text-decoration: none;
+    transition: var(--transition-base);
+}
+
+.entry-tags a:hover {
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+
+/* =============================================================================
+   PAGE 404
+   ============================================================================= */
+
+.page-404 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 60vh;
+    padding: var(--space-16);
+    gap: var(--space-6);
+}
+
+.page-404__code {
+    font-size: clamp(var(--text-4xl), 15vw, 180px);
+    font-weight: var(--font-black);
+    line-height: 1;
+    color: var(--color-border);
+    letter-spacing: var(--tracking-tight);
+}
+
+.page-404__title {
+    font-size: var(--text-2xl);
+    color: var(--color-foreground);
+}
+
+.page-404__text {
+    font-size: var(--text-md);
+    color: var(--color-muted);
+    max-width: 40ch;
+}
+
+
+/* =============================================================================
+   PRINT
+   ============================================================================= */
+
+.site-footer__bottom,
+.widget-area,
+.post-navigation,
+.comments-area {
+    /* Utilisé comme référence pour print.css */
+}

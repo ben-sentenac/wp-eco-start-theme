@@ -1,0 +1,69 @@
+/**
+ * Styles print — Eco Starter
+ * Chargé uniquement pour le média "print" (zéro impact perf en écran)
+ */
+
+@media print {
+
+    /* Masquer les éléments inutiles à l'impression */
+    .site-header,
+    .site-footer,
+    .site-nav,
+    .nav-toggle,
+    .widget-area,
+    .post-navigation,
+    .comments-area,
+    .breadcrumb,
+    .btn,
+    .hero__scroll,
+    .pagination,
+    .no-print {
+        display: none !important;
+    }
+
+    /* Fond blanc, texte noir */
+    body {
+        background: #fff;
+        color: #000;
+        font-size: 12pt;
+    }
+
+    /* Largeur maximale pour l'impression */
+    .page-wrapper,
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    /* Liens — afficher l'URL après le texte */
+    a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+
+    /* Pas d'URL pour les liens internes et ancrages */
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+        content: "";
+    }
+
+    /* Évite les coupures de page dans les titres et images */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+
+    /* Tableaux */
+    table {
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+}

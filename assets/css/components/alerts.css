@@ -1,0 +1,62 @@
+/**
+ * Alertes et notices — Eco Starter
+ * Couvre aussi les notices WordPress natives (admin + front)
+ */
+
+.alert {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+}
+
+.alert__icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 0.1em;
+}
+
+.alert__content {
+    flex: 1;
+}
+
+.alert__title {
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-1);
+    color: inherit;
+}
+
+.alert--info {
+    background-color: var(--color-info-light);
+    border-color: var(--color-info);
+    color: #1e40af;
+}
+
+.alert--success {
+    background-color: var(--color-success-light);
+    border-color: var(--color-success);
+    color: #166534;
+}
+
+.alert--warning {
+    background-color: var(--color-warning-light);
+    border-color: var(--color-warning);
+    color: #9a3412;
+}
+
+.alert--error {
+    background-color: var(--color-error-light);
+    border-color: var(--color-error);
+    color: #991b1b;
+}
+
+/* Notices WordPress en front */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+    /* Seront stylés dans woocommerce.css */
+}

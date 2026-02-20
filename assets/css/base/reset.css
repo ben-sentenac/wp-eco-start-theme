@@ -1,0 +1,363 @@
+/**
+ * Reset CSS — Eco Starter
+ *
+ * Basé sur modern-normalize + ajustements opinionatés
+ * Objectif : base cohérente cross-browser sans sur-opiniâtrer
+ *
+ * @see https://github.com/sindresorhus/modern-normalize
+ */
+
+/* =============================================================================
+   BOX MODEL
+   ============================================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+/* =============================================================================
+   DOCUMENT
+   ============================================================================= */
+
+html {
+    /* Scroll smooth uniquement si l'utilisateur ne préfère pas les animations réduites */
+    scroll-behavior: smooth;
+    /* Prévient l'ajustement de taille de police sur mobile après rotation */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Tab size cohérent pour le code */
+    tab-size: 4;
+    /* Rendu des polices */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height — mobile browsers */
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+}
+
+
+/* =============================================================================
+   TYPOGRAPHIE
+   ============================================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+    color: var(--color-foreground);
+}
+
+p {
+    margin: 0;
+}
+
+/* Supprime les marges par défaut sur les listes utilisées en navigation */
+ul, ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Rétablit le style pour les listes dans le contenu éditorial */
+.prose ul,
+.wp-block-list,
+.entry-content ul,
+.entry-content ol,
+.comment-content ul,
+.comment-content ol {
+    padding-left: var(--space-6);
+    list-style: revert;
+}
+
+blockquote {
+    margin: 0;
+}
+
+/* Prévient le débordement des éléments en pré */
+pre, code, kbd, samp {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+}
+
+pre {
+    overflow: auto;
+}
+
+/* Taille cohérente des éléments sub/sup sans affecter l'interligne */
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+
+small {
+    font-size: 80%;
+}
+
+b, strong {
+    font-weight: var(--font-bold);
+}
+
+
+/* =============================================================================
+   MÉDIAS
+   ============================================================================= */
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+/* Lazy loading natif — l'attribut loading="lazy" doit être présent dans le HTML */
+img[loading="lazy"] {
+    /* Placeholder pendant le chargement */
+    background-color: var(--color-surface);
+}
+
+/* SVG inline — hérite la couleur du parent */
+svg {
+    fill: currentColor;
+}
+
+/* Iframes responsive (embeds vidéo) */
+iframe {
+    border: 0;
+    max-width: 100%;
+}
+
+
+/* =============================================================================
+   FORMULAIRES
+   ============================================================================= */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+/* Supprime le padding interne de Firefox sur les boutons */
+::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+/* Textarea : resize vertical uniquement */
+textarea {
+    resize: vertical;
+}
+
+/* Cohérence d'apparence des inputs */
+input,
+textarea,
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+}
+
+/* Placeholder atténué */
+::placeholder {
+    color: var(--color-placeholder);
+    opacity: 1;
+}
+
+/* Checkbox et radio : taille cohérente */
+[type="checkbox"],
+[type="radio"] {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+}
+
+/* Curseur de sélection cohérent */
+[type="range"] {
+    cursor: pointer;
+}
+
+/* Désactive le spinner sur les inputs number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Supprime le clear sur les inputs de recherche IE/Edge */
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/* File input */
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+
+/* =============================================================================
+   LIENS
+   ============================================================================= */
+
+a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    transition: var(--transition-color);
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* Supprime le soulignement pour les composants qui gèrent leur propre style */
+a:where([class]) {
+    text-decoration: none;
+}
+
+
+/* =============================================================================
+   FOCUS VISIBLE — accessibilité
+   Ring cohérent sur TOUS les éléments interactifs
+   ============================================================================= */
+
+:focus {
+    outline: none; /* Supprime l'outline par défaut pour le remplacer */
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* Ring plus visible sur les boutons et inputs */
+button:focus-visible,
+[type="button"]:focus-visible,
+[type="submit"]:focus-visible,
+[type="reset"]:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px var(--color-focus-ring);
+}
+
+
+/* =============================================================================
+   TABINDEX — éléments focusables non interactifs
+   ============================================================================= */
+
+[tabindex]:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+}
+
+
+/* =============================================================================
+   SÉLECTION DE TEXTE
+   ============================================================================= */
+
+::selection {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+}
+
+
+/* =============================================================================
+   DIVERS
+   ============================================================================= */
+
+/* Ligne horizontale */
+hr {
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+/* Détails / Summary */
+details > summary {
+    cursor: pointer;
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Dialog natif */
+dialog {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    color: var(--color-foreground);
+    max-width: 90vw;
+}
+
+/* Animations — respecte prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

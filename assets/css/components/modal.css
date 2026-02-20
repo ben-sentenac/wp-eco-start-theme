@@ -1,0 +1,93 @@
+/**
+ * Modal — Eco Starter
+ * Utilise la balise <dialog> native HTML pour l'accessibilité
+ */
+
+dialog.modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    margin: auto;
+    width: 90vw;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--space-8);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-2xl);
+    color: var(--color-foreground);
+
+    animation: modal-in var(--duration-slow) var(--ease-out);
+}
+
+dialog.modal::backdrop {
+    background-color: var(--color-overlay);
+    backdrop-filter: blur(2px);
+    animation: modal-backdrop-in var(--duration-slow) var(--ease-out);
+}
+
+.modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.modal__title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+}
+
+.modal__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-foreground);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+.modal__close:hover {
+    background-color: var(--color-surface);
+}
+
+.modal__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+}
+
+@keyframes modal-in {
+    from {
+        opacity: 0;
+        translate: 0 var(--space-6);
+    }
+    to {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@keyframes modal-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    dialog.modal,
+    dialog.modal::backdrop {
+        animation: none;
+    }
+}
